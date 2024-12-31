@@ -4,10 +4,15 @@ const instructionText = document.getElementById('instruction-text');
 const logo = document.getElementById('logo');
 const score = document.getElementById('score');
 const highScoreText = document.getElementById('high-score');
+const modeSelection = document.getElementById('mode-selection');
+const pauseButton = document.getElementById('pause-button');
+const stopButton = document.getElementById('stop-button');
+const puaseIcon = pauseButton.querySelector('i');
+const stopIcon = puaseIcon.querySelector('i');
 
 // Game variables
-const gridSize = 20;
-let snake = [{x: 10, y: 10}, {x: 11, y: 10}];
+const gridSize = 30;
+let snake = [{x: 15, y: 15}, {x: 16, y: 15}];
 let food = generateFood();
 let direction = 'right';
 let nextDirection = 'right';
@@ -15,6 +20,11 @@ let gameInterval;
 let gameSpeedDelay = 200;
 let isGameStarted = false;
 let highScore = 0;
+const eatSound = new Audio('./audio/food.mp3');
+const collisionSound = new Audio('./audio/gameover.mp3');
+let currentMode = 'hard';
+let isWallPassable = false;
+let isGamePaused = false;
 
 // Draw the game's elements
 function drawGame() {
@@ -46,13 +56,13 @@ function setPos(element, pos) {
     element.style.gridRow = pos.y;
 }
 
-// Generates a random coordinate in x and y position between 1 and 20 for food
+// Generates a random coordinate in x and y position between 1 and gridSize for food
 function generateFood() {
     let foodPosition;
     let isPositionValid = false;
 
     while (!isPositionValid) {
-        const x = Math.floor(Math.random() * gridSize) + 1; // random 1-20
+        const x = Math.floor(Math.random() * gridSize) + 1; // random 1-gridSize
         const y = Math.floor(Math.random() * gridSize) + 1;
 
         foodPosition = { x, y };
@@ -98,6 +108,7 @@ function move() {
     if (head.x === food.x && head.y === food.y) {
         food = generateFood();
         increaseSpeed();
+        playEatSound();
         clearInterval(gameInterval);
         gameInterval = setInterval(() => {
             move();
@@ -112,8 +123,11 @@ function move() {
 // Starts the game
 function start() {
     isGameStarted = true;
+    modeSelection.style.display = 'none';
     instructionText.style.display = 'none';
-    logo.style.display = 'none';
+    logo.style.display = 'none'; 
+    pauseButton.style.display = 'block';
+    stopButton.style.display = 'block';
     gameInterval = setInterval(() => {
         move();
         checkCollision();
@@ -124,12 +138,23 @@ function start() {
 function checkCollision() {
     const head = snake[0];
 
-    if (head.x < 1 || head.x > gridSize || head.y < 1 || head.y > gridSize) {
-        resetGame();
+    // Wall collision logic for easy mode
+    if (isWallPassable) {
+        if (head.x < 1) head.x = gridSize;  // Snake passes through left wall
+        if (head.x > gridSize) head.x = 1;  // Snake passes through right wall
+        if (head.y < 1) head.y = gridSize;  // Snake passes through top wall
+        if (head.y > gridSize) head.y = 1;  // Snake passes through bottom wall
+    } else {
+        // Wall collision logic for hard mode
+        if (head.x < 1 || head.x > gridSize || head.y < 1 || head.y > gridSize) {
+            playCollisionSound();
+            resetGame();
+        }
     }
 
     for (let i = 1; i < snake.length; i++) {
         if (head.x === snake[i].x && head.y === snake[i].y) {
+            playCollisionSound();
             resetGame();
         }
     }
@@ -138,18 +163,24 @@ function checkCollision() {
 function stop() {
     clearInterval(gameInterval);
     isGameStarted = false;
+    isGamePaused = false;
     instructionText.style.display = 'block';
     logo.style.display = 'block';
+    modeSelection.style.display = 'block';
+    pauseButton.style.display = 'none';
+    stopButton.style.display = 'none';
 }
 
 function resetGame() {
     updateHighScore();
     stop();
-    snake = [{x: 10, y: 10}, {x: 11, y: 10}];
+    snake = [{x: 15, y: 15}, {x: 16, y: 15}]; 
     food = generateFood();
     direction = 'right';
+    nextDirection = 'right';
     gameSpeedDelay = 200;
     updateScore();
+    drawGame();
 }
 
 function updateScore() {
@@ -178,26 +209,91 @@ function increaseSpeed() {
     }
 }
 
+function playEatSound() {
+    eatSound.play();
+}
+
+function playCollisionSound() {
+    collisionSound.play();
+}
+
 // Add event listener 
 function handleKeyPress(event) {
-    if ((!isGameStarted && event.code === 'Space') || (!isGameStarted && event.key === ' ')) {
-        start();
+    if (event.code === 'Space' || event.key === ' ') {
+        event.preventDefault();
+
+        if (!isGameStarted) {
+            start();
+        } else {
+            pauseUnpause();
+        }
     } else {
         switch (event.key) {
             case 'ArrowUp':
-                if (direction !== 'down') nextDirection  = 'up';
+                if (direction !== 'down') nextDirection = 'up';
                 break;
             case 'ArrowDown':
-                if (direction !== 'up') nextDirection  = 'down';
+                if (direction !== 'up') nextDirection = 'down';
                 break;
             case 'ArrowRight':
-                if (direction !== 'left') nextDirection  = 'right';
+                if (direction !== 'left') nextDirection = 'right';
                 break;
             case 'ArrowLeft':
-                if (direction !== 'right') nextDirection  = 'left';
+                if (direction !== 'right') nextDirection = 'left';
                 break;
         }
     }
 }
 
+// Function to pause the game
+function pauseGame() {
+    clearInterval(gameInterval);
+    isGamePaused = true;
+    puaseIcon.classList.remove('fa-pause');
+    puaseIcon.classList.add('fa-play');
+    pauseButton.title = 'Resume';
+}
+
+// Function to resume the game
+function resumeGame() {
+    gameInterval = setInterval(() => {
+        move();
+        checkCollision();
+        drawGame();
+    }, gameSpeedDelay);
+    isGamePaused = false; 
+    puaseIcon.classList.remove('fa-play');
+    puaseIcon.classList.add('fa-pause');
+    pauseButton.title = 'Pause';
+}
+
 document.addEventListener('keydown', handleKeyPress);
+
+document.getElementById('easy-mode').addEventListener('change', () => {
+    if (document.getElementById('easy-mode').checked) {
+        currentMode = 'easy';
+        isWallPassable = true;
+        startGame();
+    }
+});
+
+document.getElementById('hard-mode').addEventListener('change', () => {
+    if (document.getElementById('hard-mode').checked) {
+        currentMode = 'hard';
+        isWallPassable = false;
+        startGame();
+    }
+});
+
+document.getElementById('pause-button').addEventListener('click', pauseUnpause);
+
+document.getElementById('stop-button').addEventListener('click', resetGame);
+
+function pauseUnpause() {
+    if (!isGameStarted) return;
+    if (isGamePaused) {
+        resumeGame();
+    } else {
+        pauseGame();
+    }
+}

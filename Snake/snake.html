@@ -6,6 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Snake Game</title>
     <!-- <link rel="stylesheet" href="../style.css"> -->
     <link rel="stylesheet" href="./snake.css">
@@ -19,9 +20,25 @@
         </div>
         <div class="game-border">
             <div id="game-board"></div>
+            <img id="logo" src="../media/snake-icon.jpeg" alt="snake game logo">
+            <h1 id="instruction-text">Press spacebar to start the game</h1>
+        </div>
+        <div id="mode-selection">
+            <p>Select Difficulty Mode</p>
+            <div class="radio-container">
+                <input type="radio" id="easy-mode" name="difficulty" />
+                <label for="easy-mode">Easy</label>
+            </div>
+            
+            <div class="radio-container">
+                <input type="radio" id="hard-mode" name="difficulty" checked />
+                <label for="hard-mode">Hard</label>
+            </div>
+        </div>
+        <div class="game-controls">
+            <button id="pause-button" title="Pause"><i class="fa-solid fa-pause"></i></button>
+            <button id="stop-button" title="Stop"><i class="fa-solid fa-stop"></i></button>
         </div>
     </section>
-    <h1 id="instruction-text">Press spacebar to start the game</h1>
-    <img id="logo" src="../media/snake-icon.jpeg" alt="snake game logo">
 </body>
 </html>
