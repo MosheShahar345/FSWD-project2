@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper</title>
+    <style>
+        #game-container {
+            display: grid;
+            gap: 2px;
+        }
+        .row {
+            display: flex;
+        }
+        .cell {
+            width: 30px;
+            height: 30px;
+            background-color: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 1px solid #999;
+        }
+        .cell.revealed {
+            background-color: #eee;
+            cursor: default;
+        }
+        .cell.flagged {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Minesweeper</h1>
+    <div id="game-container"></div>
+    <script src="minesweeper.js"></script>
+    <script src="minesweeper-ui.js"></script>
+    <script src="minesweeper-factory.js"></script>
+</body>
+</html>
+
