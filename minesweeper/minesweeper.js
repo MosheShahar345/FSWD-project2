@@ -136,17 +136,16 @@ class Minesweeper {
 
     handleCellClick(row, col) {
         console.log(`handleCellClick row: ${row}, col: ${col}`)
-        // Logic to reveal a cell and check win/lose conditions
         if(this.board[row][col].flagged) return;
         if(this.board[row][col].hasMine) {
             this.revealAllCells();
-        } else {
+        } else if(this.board[row][col].adjacentMines == 0) {
             this.revealAdjacentCells(row, col);
-            this.checkWin();
+        } else {
+            this.board[row][col].revealed = true;
         }
     }
 
-    // Toggle flag on a cell
     toggleFlag(row, col) {
         const cell = this.board[row][col];
         if (!cell.revealed) {
@@ -156,9 +155,7 @@ class Minesweeper {
         }
     }
 
-    // Function blueprint: Reveal all cells
     revealAllCells() {
-        // Logic to reveal all cells when the game ends
         for (let row = 0; row < this.rows; row++) {
             for (let col = 0; col < this.cols; col++) {
             this.board[row][col] = { ...this.board[row][col], revealed: true };
@@ -198,26 +195,12 @@ class Minesweeper {
         }
     }
 
-    // Function blueprint: Count adjacent mines
     countAdjacentMines(row, col) {
-        // Logic to count mines around a given cell
     }
 
-    // Function blueprint: Check win condition
     checkWin() {
-        // Logic to determine if the player has won
     }
 
-    // Function blueprint: Reset the game
     resetGame() {
-        // Logic to reset the board and state
     }
 }
-
-// Example usage:
-const game = new Minesweeper(10, 10, 10);
-game.initializeBoard();
-//game.renderBoard();
-
-// Event listeners would handle user interaction with the rendered board.
-
