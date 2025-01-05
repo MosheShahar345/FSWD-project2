@@ -3,52 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper</title>
+    <link rel="stylesheet" href="./minesweeper.css">
+    <link rel="stylesheet" href="../css/main_game_board.css">
+    <link rel="stylesheet" href="../css/header-footer.css">
+    <link rel="stylesheet" href="../css/social_media_icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>Snake Game</title>
-    <link rel="stylesheet" href="./snake.css">
-    <link rel="stylesheet" href="../css/social_media_icons.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-    <link href="../css/header-footer.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/main_game_board.css">
-    <script src="./snake.js" defer></script>
-</head> 
+    <script src="./minesweeper-ui.js"></script>
+    <script src="./minesweeper-factory.js"></script>
+    <script src="./minesweeper.js"></script>
+</head>
 <body>
     <header>
-        <h1>Snake</h1>
+        <h1>Minesweeper</h1>
         <a href="../index.html" class="header-button"><i class="fas fa-home"></i> Home</a>
     </header>
     <main>
-        <section>
-            <div class="scores">
-                <h1 id="score">000</h1>
-                <h1 id="high-score">000</h1>
-            </div>
-            <div class="game-border">
-                <div id="game-board"></div>
-                <img id="logo" src="../media/snake-icon.jpeg" alt="snake game logo">
-                <h1 id="instruction-text">Press spacebar to start the game</h1>
-            </div>
-            <div id="mode-selection">
-                <p>Select Difficulty Mode</p>
-                <div class="radio-container">
-                    <input type="radio" id="easy-mode" name="difficulty" />
-                    <label for="easy-mode">Easy</label>
-                </div>
-                
-                <div class="radio-container">
-                    <input type="radio" id="hard-mode" name="difficulty" checked />
-                    <label for="hard-mode">Hard</label>
-                </div>
-            </div>
-            <div id="game-controls">
-                <button id="pause-button" title="Pause"><i class="fa-solid fa-pause"></i></button>
-                <button id="stop-button" title="Stop"><i class="fa-solid fa-stop"></i></button>
-            </div>
-        </section>
+        <div class="scores">
+            <h1 id="score">000</h1>
+            <h1 id="high-score">000</h1>
+        </div>
+        <div class="game-border">
+            <div id="game-container"></div>
+        </div>
     </main>
     <footer>
         <div>&copy; GamesHub</div>
@@ -69,3 +51,4 @@
     </footer>
 </body>
 </html>
+
