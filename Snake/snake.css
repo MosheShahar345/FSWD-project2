@@ -1,22 +1,75 @@
 * {
-    scrollbar-width: none;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    scrollbar-width: none;
+    text-decoration: none;
+    list-style: none;
 }
 
 html, body {
-    overflow: hidden;
     margin: 0;
     height: 100%;
-    font-family: "VT323", sans-serif;
-    background: linear-gradient(135deg, #FF6070, #9F33FF, #168AFF);
+    font-family: 'Russo One', sans-serif;
 }
 
 body {
     display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    font-weight: bold;
+    text-align: center;
+    color: #FF6070;
+    font-size: 2.5rem;
+}
+
+.sign-in {
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    background-color: #FF6070;
+    text-align: center;
+    transition: all 0.1s ease-in-out;
+    padding: 0.66em 1em;
+    display: inline-block;
+    margin-left: 2rem;
+    white-space: nowrap;
+    letter-spacing: 0.1em;
+}
+
+.sign-in:hover {
+    transform: scale(1.1);
+}
+
+header {
+    background-color: #222;
+    color: #fff;
+    padding: 1rem 2rem;
+    text-align: center;
+    position: relative;
+    flex-direction: row;
+    display: flex;
     align-items: center;
-    justify-content: center; 
-    height: 100vh;
+    justify-content: space-between;
+    height: 100px;
+}
+
+main {
+    font-family: "VT323", sans-serif;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #FF6070, #9F33FF, #168AFF);
     background-size: cover;
+    background-position: center;
+    position: relative;
+    z-index: 1;
 }
 
 .game-border {
@@ -32,8 +85,8 @@ body {
 
 #game-board {
     display: grid;
-    grid-template-columns: repeat(30, 20px);
-    grid-template-rows: repeat(30, 20px);
+    grid-template-columns: repeat(25, 20px);
+    grid-template-rows: repeat(25, 20px);
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
@@ -103,7 +156,7 @@ body {
     height: 250px;
     border-radius: 50%;
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-    margin-top: 120px;
+    margin-top: 80px;
     animation: logo-fadeIn 1s ease-in-out;
 }
 
@@ -127,7 +180,7 @@ body {
     justify-self: center;
     text-align: center;
     font-size: 1.5em;
-    border-radius: 15px;
+    margin-top: 20px;
     width: 100%;
     max-width: 350px;
 }
@@ -172,15 +225,25 @@ body {
     color: #ff6070;
 }
 
-.game-controls {
+#game-controls {
     display: flex;
     gap: 10px;
     justify-content: center;
+    justify-self: center;
+    width: 45%;
+    margin: 15px;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(50px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: none;
 }
 
 button {
     justify-self: center; 
-    margin: 15px 5px;
+    margin: 10px;
     padding: 10px 20px;
     font-size: 1.2em;
     background-color: #FF6070;
@@ -192,10 +255,41 @@ button {
     display: none;
 }
 
-button:focus {
+#stop-button:focus, #pause-button:focus {
     outline: none;
 }
 
-button:hover {
+#stop-button:hover, #pause-button:hover {
     transform: scale(1.1);
+}
+
+footer {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #333;
+    color: #FF6070;
+    text-align: center;
+    padding: 1rem;
+    gap: 1rem;
+    z-index: 1000;
+}
+
+@media (max-width: 768px) {
+    #view {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .image-container {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .sign-in {
+        font-size: 1em;
+        padding: 0.6em 1.2em;
+    }
 }
