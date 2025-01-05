@@ -34,8 +34,8 @@ class SnakeGame {
 
         // Game variables
         this.gridSize = 25; // Grid size of the game board
-        this.snakeCor = Math.floor(this.gridSize / 2); // Initial snake coordinates
-        this.snake = [{x: this.snakeCor, y: this.snakeCor}, {x: this.snakeCor + 1, y: this.snakeCor}]; // Initial snake positions
+        this.snakeCoor = Math.floor(this.gridSize / 2); // Initial snake coordinates
+        this.snake = [{x: this.snakeCoor, y: this.snakeCoor}, {x: this.snakeCoor + 1, y: this.snakeCoor}]; // Initial snake positions
         this.food = this.generateFood(); // Food position
         this.direction = 'right'; // Initial snake movement direction
         this.nextDirection = 'right'; // Next direction the snake will move in
@@ -254,7 +254,7 @@ class SnakeGame {
     resetGame() {
         this.updateHighScore();
         this.stop();
-        this.snake = [{x: this.snakeCor, y: this.snakeCor}, {x: this.snakeCor + 1, y: this.snakeCor}];
+        this.snake = [{x: this.snakeCoor, y: this.snakeCoor}, {x: this.snakeCoor + 1, y: this.snakeCoor}];
         this.food = this.generateFood();
         this.direction = 'right';
         this.nextDirection = 'right';
