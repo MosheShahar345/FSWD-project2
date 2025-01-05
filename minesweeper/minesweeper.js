@@ -1,4 +1,10 @@
 // Minesweeper class
+const GameState = Object.freeze({
+            DEFAULT: Symbol("default"),
+            LOST: Symbol("lost"),
+            WON: Symbol("won")
+});
+
 class Minesweeper {
     constructor(rows, cols, mines) {
         this.rows = rows;
@@ -6,18 +12,30 @@ class Minesweeper {
         this.mines = mines;
         this.board = [];
         this.isGameOver = false;
+        this.cellsFlagged = 0;
+        this.GameState = GameState.DEFAULT;
     }
 
     getCell(row, col) {
         return this.board[row][col];
     }
 
+    getRemainingMines() {
+        return this.mines - this.cellsFlagged;
+    }
+
+    get getGameState() {
+        return this.gameState;
+    }
+
     // Initialize the board and place mines
     initializeBoard() {
+        //this.isGameOver = false;
+        this.gameState = GameState.DEFAULT;
+        this.cellsFlagged = 0;
         // Create empty board
         //this.board = Array.from({ length: this.rows }, () => Array(this.cols).fill({ hasMine: false, revealed: false, adjacentMines: 0, flagged: false }));
         this.board = Array.from({ length: this.rows }, () => Array.from({ length: this.cols }, () => ({ hasMine: false, revealed: false, adjacentMines: 0, flagged: false })));
-
 
         // Place mines randomly
         let minesPlaced = 0;
@@ -48,122 +66,53 @@ class Minesweeper {
                 }
             }
         }
-        /* ui
-        const gameContainer = document.getElementById('game-container');
-        gameContainer.innerHTML = '';
-        for (let row = 0; row < this.rows; row++) {
-            const rowElement = document.createElement('div');
-            rowElement.classList.add('row');
-            for (let col = 0; col < this.cols; col++) {
-                const cellElement = document.createElement('div');
-                cellElement.classList.add('cell');
-                cellElement.dataset.row = row;
-                cellElement.dataset.col = col;
-                cellElement.addEventListener('click', () => this.handleCellClick(row, col));
-                cellElement.addEventListener('contextmenu', (e) => {
-                    e.preventDefault();
-                    this.toggleFlag(row, col);
-
-                });
-                //cellElement.addEventListener('contextmenu', () => this.handleCellFlagged(row, col));
-
-                rowElement.appendChild(cellElement);
-            }
-            gameContainer.appendChild(rowElement);
-        }
-            */
-
     }
 
-    /* ui
-    // Render the board in HTML
-    renderBoard() {
-        for (let row = 0; row < this.rows; row++) {
-            for (let col = 0; col < this.cols; col++) {
-                this.renderCell(row, col);
-            }
-        }
-    }
-
-     renderCell(row, col) {
-        //console.log(`renderCell row: ${row}, col: ${col}`)
-        const cell = this.board[row][col];
-        const cellElement = document.querySelector(`.cell[data-row="${row}"][data-col="${col}"]`);
-
-        // Add visual state based on cell properties
-        if (cell.revealed) {
-            cellElement.classList.add('revealed');
-            if (cell.hasMine) {
-                cellElement.textContent = '💣';
-            } else if (cell.adjacentMines > 0) {
-                cellElement.textContent = cell.adjacentMines;
-            }
-        } else if (cell.flagged) {
-            cellElement.textContent = '🚩';
-            console.log(cellElement);
-        } else {
-            cellElement.textContent = '';
-        }
-
-        return cellElement;
-    }
-
-    // Function blueprint: Handle cell clicks
-    handleCellClick(row, col) {
-        console.log(`handleCellClick row: ${row}, col: ${col}`)
-        // Logic to reveal a cell and check win/lose conditions
-        if(this.board[row][col].flagged) return;
-        if(this.board[row][col].hasMine) {
-            this.revealAllCells();
-        } else {
-            this.revealAdjacentCells(row, col);
-            this.checkWin();
-            this.renderBoard();
-        }
-    }
-
-    // Toggle flag on a cell
     toggleFlag(row, col) {
         const cell = this.board[row][col];
         if (!cell.revealed) {
             //const flag = this.board[row][col].flagged ? false : true;
             //this.board[row][col] = { ...this.board[row][col], flagged: flag };
             cell.flagged = !cell.flagged;
-            this.renderBoard();
+            this.cellsFlagged = cell.flagged ? this.cellsFlagged + 1 : this.cellsFlagged - 1;
         }
     }
-    */
 
     handleCellClick(row, col) {
-        console.log(`handleCellClick row: ${row}, col: ${col}`)
-        if(this.board[row][col].flagged) return;
-        if(this.board[row][col].hasMine) {
-            this.revealAllCells();
-        } else if(this.board[row][col].adjacentMines == 0) {
+        if (this.board[row][col].flagged) { //if the cell was flagged
+            return; 
+        }
+        else if (this.board[row][col].hasMine) { //if the cell was a mine
+            this.GameLost();
+            return;
+        } else if (this.board[row][col].adjacentMines == 0) { //if the cell has no adjacent mines
             this.revealAdjacentCells(row, col);
-        } else {
+        } else { //if the cell has adjacent mines
             this.board[row][col].revealed = true;
         }
+        this.checkGameState();
     }
 
-    toggleFlag(row, col) {
-        const cell = this.board[row][col];
-        if (!cell.revealed) {
-            //const flag = this.board[row][col].flagged ? false : true;
-            //this.board[row][col] = { ...this.board[row][col], flagged: flag };
-            cell.flagged = !cell.flagged;
-        }
-    }
-
-    revealAllCells() {
+    checkGameState() {
         for (let row = 0; row < this.rows; row++) {
             for (let col = 0; col < this.cols; col++) {
-            this.board[row][col] = { ...this.board[row][col], revealed: true };
+                if (!this.board[row][col].hasMine && !this.board[row][col].revealed) return;
+            }
+        }
+        this.gameState = GameState.WON;
+    }
+
+    GameLost() {
+        this.gameState = GameState.LOST;
+
+        for (let row = 0; row < this.rows; row++) {
+            for (let col = 0; col < this.cols; col++) {
+                this.board[row][col] = { ...this.board[row][col], revealed: true };
             }
         }
     }
 
-     // Reveal adjacent cells using BFS
+    // Reveal adjacent cells using BFS
     revealAdjacentCells(row, col) {
         const queue = [];
         queue.push({ row, col });
@@ -195,12 +144,7 @@ class Minesweeper {
         }
     }
 
-    countAdjacentMines(row, col) {
-    }
-
-    checkWin() {
-    }
-
     resetGame() {
+        this.initializeBoard();
     }
 }

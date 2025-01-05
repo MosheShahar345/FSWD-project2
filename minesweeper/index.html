@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minesweeper</title>
     <style>
-        #game-container {
+        #game {
+            display: inline-block;
+        }
+        #game-container{
             display: grid;
             gap: 2px;
         }
@@ -29,11 +32,26 @@
         .cell.flagged {
             background-color: #ccc;
         }
+        .cell.exploded {
+            background-color: red;
+        }
+        #game-status {
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <h1>Minesweeper</h1>
-    <div id="game-container"></div>
+    <div id="game">
+        <div id="game-status">
+            <div id="flagged-count">asdf</div>
+            <div id="state">@</div>
+            <div id="timer">000</div>
+        </div>
+        <div id="game-container"></div>
+    </div>
     <script src="minesweeper.js"></script>
     <script src="minesweeper-ui.js"></script>
     <script src="minesweeper-factory.js"></script>
