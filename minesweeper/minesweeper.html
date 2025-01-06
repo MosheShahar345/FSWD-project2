@@ -14,9 +14,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="./minesweeper-ui.js"></script>
-    <script src="./minesweeper-factory.js"></script>
-    <script src="./minesweeper.js"></script>
 </head>
 <body>
     <header>
@@ -24,20 +21,21 @@
         <a href="../index.html" class="header-button"><i class="fas fa-home"></i> Home</a>
     </header>
     <main>
-        <div class="scores">
-            <h1 id="score">000</h1>
-            <h1 id="high-score">000</h1>
+      <section>
+        <div class="scores" id="game-status">
+            <div id="flagged-count">0</div>
+            <div id="state">@</div>
+            <div id="timer">000</div>
         </div>
         <div class="game-border">
             <div id="game">
-                <div id="game-status">
-                    <div id="flagged-count">asdf</div>
-                    <div id="state">@</div>
-                    <div id="timer">000</div>
-                </div>
                 <div id="game-container"></div>
             </div>
         </div>
+      </section>
+      <script src="./minesweeper.js"></script>
+      <script src="./minesweeper-ui.js"></script>
+      <script src="./minesweeper-factory.js"></script>
     </main>
     <footer>
         <div>&copy; GamesHub</div>

@@ -27,6 +27,24 @@ body {
     display: flex;
 }
 
+#state {
+    cursor: pointer;
+}
+
+.cell.revealed {
+    background-color: white;
+    cursor: default;
+}
+
+.cell.exploded {
+    background-color: red;
+    cursor: default;
+}
+
+.cell.flagged {
+    background-color: #ccc;
+}
+
 .cell {
     width: 30px;
     height: 30px;
@@ -36,13 +54,4 @@ body {
     justify-content: center;
     cursor: pointer;
     border: 1px solid #999;
-}
-
-.cell .revealed {
-    background-color: #eee;
-    cursor: default;
-}
-
-.cell .flagged {
-    background-color: #ccc;
 }

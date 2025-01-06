@@ -21,9 +21,9 @@ class MinesweeperUI {
 
     initializeUI() {
         //initialize games status
+        this.flaggedCountElement.textContent = this.game.getRemainingMines();
         this.StateElement.addEventListener('click', () => this.handleReset());
         this.StateElement.textContent = "😀";
-        this.flaggedCountElement.textContent = this.game.getRemainingMines();
 
         //initialize board
         this.gameContainer.innerHTML = '';
