@@ -18,7 +18,7 @@ class SnakeGame {
      * @param {string} options.gameControls - The ID of the game controls container element.
      * @param {string} options.icon - The class name of the icon inside the pause button.
      */
-    constructor({ board, instructionText, logo, score, highScoreText, modeSelection, pauseButton, stopButton, gameControls, icon }) {
+    constructor({ board, instructionText, logo, score, highScoreText, modeSelection, pauseButton, stopButton, gameControls, icon, user }) {
         // HTML elements
         this.board = document.getElementById(board);
         this.instructionText = document.getElementById(instructionText);
@@ -31,6 +31,7 @@ class SnakeGame {
         this.gameControls = document.getElementById(gameControls);
         this.pauseIcon = this.pauseButton.querySelector(icon);
         this.stopIcon = this.pauseIcon.querySelector(icon);
+        this.user = user;
 
         // Game variables
         this.gridSize = 25; // Grid size of the game board
