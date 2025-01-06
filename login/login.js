@@ -140,8 +140,16 @@ function createLoginAndSignInBoxes() {
     document.body.appendChild(signInBox);
 }
 
+function addStylesheet() {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'login.css';
+    document.head.appendChild(link);
+}
+
 // Call the function to create the elements
 createLoginAndSignInBoxes();
+addStylesheet();
 
 class Login {
     constructor() {
