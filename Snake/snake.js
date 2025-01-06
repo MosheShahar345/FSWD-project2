@@ -21,7 +21,7 @@ class SnakeGame {
     constructor({ board, instructionText, logo, score, highScoreText, modeSelection, pauseButton, stopButton, gameControls, icon }) {
         // HTML elements
         this.board = document.getElementById(board);
-        this.instructionText = document.getElementById(instructionText),
+        this.instructionText = document.getElementById(instructionText);
         this.logo = document.getElementById(logo);
         this.score = document.getElementById(score);
         this.highScoreText = document.getElementById(highScoreText);
