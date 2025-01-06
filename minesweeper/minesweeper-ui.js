@@ -1,5 +1,5 @@
 class MinesweeperUI {
-    constructor(game, gameContainerId, gameStatusId) {
+    constructor(gameContainerId, gameStatusId, user, rows = 10, cols = 10, mines = 20) {
         this.seconds = 0;
         this.timerInterval;
         this.game = game; // Instance of the Minesweeper class
@@ -9,8 +9,13 @@ class MinesweeperUI {
         this.StateElement = document.getElementById('state');
         this.TimerElement = document.getElementById("timer");
 
-        this.rows = this.game.rows;
-        this.cols = this.game.cols;
+        this.game = new Minesweeper(rows, cols, mines);
+        this.game.initializeBoard();
+
+        this.user = user;
+
+        this.rows = rows;
+        this.cols = cols;
     }
 
     // Function to update the timer

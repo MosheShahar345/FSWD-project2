@@ -9,4 +9,4 @@ function createMinesweeper(containerId,gameStatusId, rows = 10, cols = 10, mines
     return { game, ui };
 }
 
-const asdf = createMinesweeper('game-container', 'game-status');
+//const asdf = createMinesweeper('game-container', 'game-status');
