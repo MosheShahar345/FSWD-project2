@@ -1,14 +1,15 @@
 // Call the function to create the elements
 class Login {
     constructor(user, LoggedInUI) {
-        this.createLoginAndSignInBoxes();
-        this.loginButton = document.getElementById('login-button');
-        this.loginBox = document.getElementById('login-box');
-        this.submitLogin = document.getElementById('submit-login');
+        this.loginBox = document.createElement('div');
 
+        this.overlay = document.createElement('div');
+        this.createLoginAndSignInBoxes();
+        this.createSignInBoxes();
+        this.loginButton = document.getElementById('login-button');
+        this.submitLogin = document.getElementById('submit-login');
         this.SignInButton = document.getElementById('sign-in-button');
         this.SignInBox = document.getElementById('sign-in-box');
-        this.overlay = document.getElementById('overlay');
         this.closeLogin = document.getElementById('close-login');
         this.closeSignIn = document.getElementById('close-sing-in');
         this.createEventListeners();
@@ -21,19 +22,17 @@ class Login {
 
     createLoginAndSignInBoxes() {
         // Create overlay
-        const overlay = document.createElement('div');
-        overlay.className = 'overlay';
-        overlay.id = 'overlay';
-        document.body.appendChild(overlay);
+        this.overlay.className = 'overlay';
+        this.overlay.id = 'overlay';
+        document.body.appendChild(this.overlay);
 
         // Create login box
-        const loginBox = document.createElement('div');
-        loginBox.className = 'login-box';
-        loginBox.id = 'login-box';
+        this.loginBox.className = 'login-box';
+        this.loginBox.id = 'login-box';
 
         const loginHeader = document.createElement('h3');
         loginHeader.textContent = 'Login';
-        loginBox.appendChild(loginHeader);
+        this.loginBox.appendChild(loginHeader);
 
         const loginForm = document.createElement('form');
 
@@ -77,8 +76,10 @@ class Login {
         closeLoginButton.textContent = 'Close';
         loginForm.appendChild(closeLoginButton);
 
-        loginBox.appendChild(loginForm);
-        document.body.appendChild(loginBox);
+        this.loginBox.appendChild(loginForm);
+        document.body.appendChild(this.loginBox);
+    }
+    createSignInBoxes() {
 
         // Create sign-in box
         const signInBox = document.createElement('div');

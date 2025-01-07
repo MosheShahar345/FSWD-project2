@@ -14,15 +14,15 @@ const minesweeper = new MinesweeperUI('game-container', 'game-status', user);
 minesweeper.initializeUI();
 
 // Create a new instance of the Snake game
-// const snake = new SnakeGame({
-//     board: 'game-board',
-//     instructionText: 'instruction-text',
-//     logo: 'logo',
-//     score: 'score',
-//     highScoreText: 'high-score',
-//     modeSelection: 'mode-selection',
-//     pauseButton: 'pause-button',
-//     stopButton: 'stop-button',
-//     gameControls: 'game-controls',
-//     icon: 'i'
-// });
+const snake = new SnakeGame({
+    board: 'game-board',
+    instructionText: 'instruction-text',
+    logo: 'logo',
+    score: 'score',
+    highScoreText: 'high-score',
+    modeSelection: 'mode-selection',
+    pauseButton: 'pause-button',
+    stopButton: 'stop-button',
+    gameControls: 'game-controls',
+    icon: 'i'
+});
