@@ -1,7 +1,8 @@
 
 class Header {
     constructor() {
-        this.header = document.createElement('header');
+        this.header = document.querySelector('header');
+        //this.header = document.createElement('header');
         this.nav = document.createElement('div');
     }
     createHeader() {
@@ -28,7 +29,20 @@ class Header {
         document.body.insertAdjacentElement("afterbegin", this.header);
     }
     LoggedInUI() {
+        const title = document.createElement('h1');
+        title.textContent = "Welcome to GamesHub";
 
+        this.nav = document.createElement('div');
+
+        const a = document.createElement('a');
+        a.href = "#";
+        a.textContent = 'Logged In';
+        a.classList.add('header-button');
+        this.nav.appendChild(a);
+        this.header.appendChild(this.nav);
+    }
+
+    changeToLoggedIn() {
         this.header.removeChild(this.nav);
 
         const title = document.createElement('h1');
@@ -43,4 +57,13 @@ class Header {
         this.nav.appendChild(a);
         this.header.appendChild(this.nav);
     }
+}
+
+const header = new Header();
+
+const data = localStorage.getItem("user");
+if(data) {
+    header.LoggedInUI();
+} else {
+    header.createHeader();
 }

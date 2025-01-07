@@ -1,8 +1,8 @@
 class MinesweeperUI {
-    constructor(gameContainerId, gameStatusId, user, rows = 10, cols = 10, mines = 20) {
+    constructor(gameContainerId, gameStatusId, rows = 10, cols = 10, mines = 20) {
         this.seconds = 0;
         this.timerInterval;
-        this.game = game; // Instance of the Minesweeper class
+        //this.game = game; // Instance of the Minesweeper class
         this.gameContainer = document.getElementById(gameContainerId);
         this.gameStatus = document.getElementById(gameStatusId);
         this.flaggedCountElement = document.getElementById('flagged-count');
@@ -11,8 +11,6 @@ class MinesweeperUI {
 
         this.game = new Minesweeper(rows, cols, mines);
         this.game.initializeBoard();
-
-        this.user = user;
 
         this.rows = rows;
         this.cols = cols;
@@ -157,3 +155,7 @@ class MinesweeperUI {
     }
 
 }
+
+const minesweeper = new MinesweeperUI('game-container', 'game-status');
+minesweeper.initializeUI();
+console.log("asdf");

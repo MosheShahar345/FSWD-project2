@@ -382,8 +382,8 @@ class SnakeGame {
     }
 }
 
-// Create a new instance of the SnakeGame
-const game = new SnakeGame({
+// Create a new instance of the Snake game
+const snake = new SnakeGame({
     board: 'game-board',
     instructionText: 'instruction-text',
     logo: 'logo',
