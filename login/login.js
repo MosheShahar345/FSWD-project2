@@ -5,8 +5,6 @@ class Login {
         this.loggedIn = document.getElementById('logged-in');
         this.loggedInButton = document.getElementById('logged-in-button');
         this.profileInfo = document.getElementById('profile-info');
-        this.profileInfoFlag = false;
-
 
         this.loginBox = document.getElementById('login-box');
         this.overlay = document.getElementById('overlay');
@@ -81,19 +79,14 @@ class Login {
 
         });
 
-        this.loggedIn.addEventListener('click', () => {
-            if(this.profileInfoFlag) {
-                console.log('was block');
-                this.profileInfo.style.display = 'none';
-            } else {
-                console.log('was none');
+        this.loggedInButton.addEventListener('click', () => {
+            if(this.profileInfo.style.display === 'none') {
                 this.profileInfo.style.display = 'block';
+            } else {
+                this.profileInfo.style.display = 'none';
             }
-            this.profileInfoFlag = !this.profileInfoFlag; 
-            console.log(this.profileInfoFlag);
         });
     }
 }
 
 const login = new Login();
-login.createEventListeners();

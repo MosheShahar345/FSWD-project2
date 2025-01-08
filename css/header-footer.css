@@ -104,3 +104,8 @@ footer {
     overflow: hidden;
     border-radius: 50%;
 }
+
+.profile-info-section {
+    border-bottom: 1px solid #F2F2F2;
+    padding: 18px 5px;
+}
