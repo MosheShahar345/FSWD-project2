@@ -1,3 +1,9 @@
+// localStorage.setItem('currentUser', JSON.stringify({
+//     'username': 'mosheS',
+//     'password': '12345',
+//     'highScore': 2
+// }));
+
 /**
  * Class representing the Snake Game.
  * The game includes the ability to start, pause, resume, and reset, 
@@ -18,7 +24,7 @@ class SnakeGame {
      * @param {string} options.gameControls - The ID of the game controls container element.
      * @param {string} options.icon - The class name of the icon inside the pause button.
      */
-    constructor({ board, instructionText, logo, score, highScoreText, modeSelection, pauseButton, stopButton, gameControls, icon, user }) {
+    constructor({ board, instructionText, logo, score, highScoreText, modeSelection, pauseButton, stopButton, gameControls, icon }) {
         // HTML elements
         this.board = document.getElementById(board);
         this.instructionText = document.getElementById(instructionText);
@@ -31,7 +37,6 @@ class SnakeGame {
         this.gameControls = document.getElementById(gameControls);
         this.pauseIcon = this.pauseButton.querySelector(icon);
         this.stopIcon = this.pauseIcon.querySelector(icon);
-        this.user = user;
 
         // Game variables
         this.gridSize = 25; // Grid size of the game board
@@ -43,12 +48,15 @@ class SnakeGame {
         this.gameInterval = null; // Interval for the game loop
         this.gameSpeedDelay = 200; // Speed of the game, lower values are faster
         this.isGameStarted = false; // Indicates if the game has started
-        this.highScore = 0; // Track the highest score
         this.eatSound = new Audio('./audio/food.mp3'); // Sound played when snake eats food
         this.collisionSound = new Audio('./audio/gameover.mp3'); // Sound played when snake collides
         this.currentMode = 'hard'; // Current game mode
         this.isWallPassable = false; // Indicates if walls are passable (easy mode)
         this.isGamePaused = false; // Indicates if the game is paused
+        this.user = JSON.parse(localStorage.getItem('currentUser'));
+        this.highScore = this.user ? this.user.highScore : 0; // Track the highest score
+
+        this.updateHighScore();
 
         // Event listeners
         document.addEventListener('keydown', this.handleKeyPress.bind(this));
@@ -262,6 +270,8 @@ class SnakeGame {
         this.gameSpeedDelay = 200;
         this.updateScore();
         this.drawGame();
+        this.user.highScore = this.highScore;
+        localStorage.setItem('currentUser', JSON.stringify(this.user));
     }
 
     /**
@@ -279,9 +289,13 @@ class SnakeGame {
         const currentScore = this.snake.length - 2;
         if (currentScore > this.highScore) {
             this.highScore = currentScore;
-            this.highScoreText.textContent = this.highScore.toString().padStart(3, '0');
         }
-        this.highScoreText.style.display = 'block';
+
+        this.highScoreText.textContent = this.highScore.toString().padStart(3, '0');
+
+        if (this.isGameStarted || this.highScore > 0 || this.user) {
+            this.highScoreText.style.display = 'block';
+        }
     }
 
     /**
@@ -380,6 +394,7 @@ class SnakeGame {
         this.pauseIcon.classList.replace('fa-play', 'fa-pause');
         this.isGamePaused = false;
     }
+
 }
 
 // Create a new instance of the Snake game
