@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/header-footer.css">
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
     <script type="text/javascript" src="./login/login.js" defer></script>
+    <script type="text/javascript" src="./main.js" defer></script>
 </head>
 
 <body>
@@ -41,27 +42,44 @@
     <div class="login-box" id="login-box">
         <h3>Login</h3>
         <form id="submit-login-form">
-            <label for="login-username">Username:</label><br>
-            <input type="text" id="login-username" name="username"><br><br>
-            <label for="login-password">Password:</label><br>
-            <input type="password" id="login-password" name="password"><br><br>
-            <button type="submit">Login</button>
-            <button type="button" id="close-login">Close</button>
+            <div class="form-separator">
+                <label for="login-username">Username:</label>
+                <input type="text" id="login-username" name="username">
+            </div>
+            <div class="form-separator">
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" name="password">
+            </div>
+            <div class="form-buttons">
+                <button type="submit" id="submit-login-button">Login</button>
+                <button type="button" id="close-login">Close</button>
+            </div>
         </form>
     </div>
     <div class="sign-in-box" id="sign-in-box">
         <h3>Sign In</h3>
         <form id="submit-signin-form">
-            <label for="sign-in-username">Username:</label><br>
-            <input type="text" id="sign-in-username" name="username"><br><br>
-            <label for="sign-in-email">email:</label><br>
-            <input type="text" id="sign-in-email" name="email"><br><br>
-            <label for="sign-in-password">Password:</label><br>
-            <input type="password" id="sign-in-password" name="password"><br><br>
-            <label for="sign-in-verify-password">Verify Password:</label><br>
-            <input type="verify-password" id="sign-in-verify-password" name="verify-password"><br><br>
-            <button type="submit">Login</button>
-            <button type="button" id="close-sing-in">Close</button>
+            <div class="form-separator">
+                <label for="sign-in-username">Username:</label>
+                <input type="text" id="sign-in-username" name="username">
+            </div>
+            <div class="form-separator">
+                <label for="sign-in-email">email:</label>
+                <input type="text" id="sign-in-email" name="email">
+            </div>
+            <div class="form-separator">
+                <label for="sign-in-password">Password:</label>
+                <input type="password" id="sign-in-password" name="password">
+            </div>
+            <div class="form-separator">
+                <label for="sign-in-confirm-password">Verify Password:</label>
+                <input type="password" id="sign-in-confirm-password" name="sign-in-confirm-password">
+                <span id="password-error" class="error"></span>
+            </div>
+            <div class="form-buttons">
+                <button type="submit" id="submit-signin-button">Login</button>
+                <button type="button" id="close-sing-in">Close</button>
+            </div>
         </form>
     </div>
     <main>
@@ -98,7 +116,6 @@
         </section>
     </main>
     <footer>
-        <div>&copy; GamesHub</div>
         <div class="socials-container">
             <a data-social="X" target="_blank" style="--accent-color: black;" href="https://x.com">
                 <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -130,6 +147,7 @@
                 </svg>
             </a>
         </div>
+        <div>&copy; GamesHub</div>
     </footer>
 </body>
 
