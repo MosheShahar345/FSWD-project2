@@ -24,15 +24,26 @@
         <a href="#" id="sign-in-button" class="header-button">Sign In</a>
     </div>
     <div id="logged-in" class="image-wrapper-profile">
-        <a href="#" id="logged-in-button">
-            <img src="../media/blank-profile-picture-973460_1280.jpg" alt="profile picture">
-        </a>
+        <img class="image-wrapper-profile" id="logged-in-button" src="../media/blank-profile-picture-973460_1280.jpg" alt="profile picture">
     </div>
     </header>
+    <div id="profile-info" class="profile-info">
+        <div class="profile-info-section">
+            <p>Profile</p> 
+            <br>
+            <p>stats</p> 
+        </div>
+        <div class="profile-info-section log-out">
+            <a href="#">Log Out</a>
+        </div>
+        <div class="profile-info-section">
+            <p>Developer information and credits</p> 
+        </div>
+    </div>
     <div class="overlay" id="overlay"></div>
     <div class="login-box" id="login-box">
         <h3>Login</h3>
-        <form>
+        <form id="submit-login-form">
             <label for="login-username">Username:</label><br>
             <input type="text" id="login-username" name="username"><br><br>
             <label for="login-password">Password:</label><br>
@@ -43,7 +54,7 @@
     </div>
     <div class="sign-in-box" id="sign-in-box">
         <h3>Sign In</h3>
-        <form>
+        <form id="submit-signin-form">
             <label for="sign-in-username">Username:</label><br>
             <input type="text" id="sign-in-username" name="username"><br><br>
             <label for="sign-in-email">email:</label><br>
