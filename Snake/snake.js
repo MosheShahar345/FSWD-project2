@@ -1,8 +1,3 @@
-// localStorage.setItem('currentUser', JSON.stringify({
-//     'username': 'mosheS',
-//     'password': '12345',
-//     'highScore': 2
-// }));
 
 /**
  * Class representing the Snake Game.
@@ -270,8 +265,10 @@ class SnakeGame {
         this.gameSpeedDelay = 200;
         this.updateScore();
         this.drawGame();
-        this.user.highScore = this.highScore;
-        localStorage.setItem('currentUser', JSON.stringify(this.user));
+        this.user && localStorage.setItem('currentUser', JSON.stringify({ 
+            ...this.user,
+            'highScore': this.highScore
+        }));
     }
 
     /**
@@ -293,7 +290,7 @@ class SnakeGame {
 
         this.highScoreText.textContent = this.highScore.toString().padStart(3, '0');
 
-        if (this.isGameStarted || this.highScore > 0 || this.user) {
+        if (this.isGameStarted || this.user) {
             this.highScoreText.style.display = 'block';
         }
     }
