@@ -4,6 +4,7 @@ class Login {
         this.loggedOut = document.getElementById('logged-out');
         this.loggedIn = document.getElementById('logged-in');
         this.loggedInButton = document.getElementById('logged-in-button');
+        this.logOutButton = document.getElementById('log-out-button');
         this.profileInfo = document.getElementById('profile-info');
 
         this.loginBox = document.getElementById('login-box');
@@ -29,6 +30,8 @@ class Login {
         this.loggedIn.style.display = 'none';
         this.loggedOut.style.display = 'block';
         localStorage.removeItem("currentUser");
+
+        this.profileInfo.style.display = 'none';
     }
 
     goLoggedIn() {
@@ -86,8 +89,8 @@ class Login {
             formData.forEach(function(value, key){
                 object[key] = value;
             });
-            console.log(formData);
-            this.signinAttempt(formData);
+            console.log(object);
+            this.signinAttempt(object);
             //localStorage.setItem(object["username"], JSON.stringify(object));
 
             this.loginBox.style.display = 'none';
@@ -110,6 +113,10 @@ class Login {
             this.SignInBox.style.display = 'none';
             this.overlay.style.display = 'none';
 
+        });
+
+        this.logOutButton.addEventListener('click', () => {
+            this.goLoggedOut();
         });
 
         this.loggedInButton.addEventListener('click', () => {
