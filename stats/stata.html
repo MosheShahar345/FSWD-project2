@@ -3,101 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake Game</title>
+    <title>Stats</title>
+    <link rel="stylesheet" href="./stats.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="./snake.css">
     <link rel="stylesheet" href="../css/social_media_icons.css">
     <link rel="stylesheet" href="../css/header-footer.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
     <link href="../css/header-footer.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/main_game_board.css">
-    <script type="module" src="./snake.js" defer></script>
     <script type="text/javascript" src="../login/login.js" defer></script>
-</head> 
+</head>
 <body>
     <header>
-    <h1>Welcome to GamesHub</h1>
-    <div id="logged-out">
-        <a href="#" id="login-button" class="header-button">Login</a>
-        <a href="#" id="sign-in-button" class="header-button">Sign In</a>
-    </div>
-    <div id="logged-in" class="image-wrapper-profile">
-        <img class="image-wrapper-profile" id="logged-in-button" src="../media/blank-profile-picture-973460_1280.jpg" alt="profile picture">
-    </div>
-    </header>
-    <div id="profile-info" class="profile-info">
-        <div class="profile-info-section">
-            <p>Profile</p> 
-            <br>
-            <p>stats</p> 
+        <h1>Statistics</h1>
+        <div id="logged-out">
+            <a href="#" id="login-button" class="header-button">Login</a>
+            <a href="#" id="sign-in-button" class="header-button">Sign In</a>
         </div>
-        <div class="profile-info-section log-out">
-            <a href="#" id="log-out-button">Log Out</a>
+        <div id="logged-in" class="image-wrapper-profile">
+            <img class="image-wrapper-profile" id="logged-in-button" src="../media/blank-profile-picture-973460_1280.jpg" alt="profile picture">
         </div>
-        <div class="profile-info-section">
-            <p>Developer information and credits</p> 
-        </div>
-    </div>
-    <div class="overlay" id="overlay"></div>
-    <div class="login-box" id="login-box">
-        <h3>Login</h3>
-        <form id="submit-login-form">
-            <label for="login-username">Username:</label><br>
-            <input type="text" id="login-username" name="username"><br><br>
-            <label for="login-password">Password:</label><br>
-            <input type="password" id="login-password" name="password"><br><br>
-            <button type="submit">Login</button>
-            <button type="button" id="close-login">Close</button>
-        </form>
-    </div>
-    <div class="sign-in-box" id="sign-in-box">
-        <h3>Sign In</h3>
-        <form id="submit-signin-form">
-            <label for="sign-in-username">Username:</label><br>
-            <input type="text" id="sign-in-username" name="username"><br><br>
-            <label for="sign-in-email">email:</label><br>
-            <input type="text" id="sign-in-email" name="email"><br><br>
-            <label for="sign-in-password">Password:</label><br>
-            <input type="password" id="sign-in-password" name="password"><br><br>
-            <label for="sign-in-verify-password">Verify Password:</label><br>
-            <input type="verify-password" id="sign-in-verify-password" name="verify-password"><br><br>
-            <button type="submit">Login</button>
-            <button type="button" id="close-sing-in">Close</button>
-        </form>
-    </div>
+        </header>
     <main>
-        <section>
-            <div class="scores">
-                <h1 id="score">000</h1>
-                <h1 id="high-score">000</h1>
-            </div>
-            <div class="game-border">
-                <div id="game-board"></div>
-                <img id="logo" src="../media/snake-icon.jpeg" alt="snake game logo">
-                <h1 id="instruction-text">Press spacebar to start the game</h1>
-            </div>
-            <div id="mode-selection">
-                <p>Select Difficulty Mode</p>
-                <div class="radio-container">
-                    <input type="radio" id="easy-mode" name="difficulty" />
-                    <label for="easy-mode">Easy</label>
-                </div>
-                
-                <div class="radio-container">
-                    <input type="radio" id="hard-mode" name="difficulty" checked />
-                    <label for="hard-mode">Hard</label>
-                </div>
-            </div>
-            <div id="game-controls">
-                <button id="pause-button" title="Pause"><i class="fa-solid fa-pause"></i></button>
-                <button id="stop-button" title="Stop"><i class="fa-solid fa-stop"></i></button>
-            </div>
-        </section>
+        <table id="user-stats">
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Snake High Score</th>
+                    <th>Minesweeper High Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <td>s are added dynamically here -->
+            </tbody>
+        </table>
     </main>
+    <script type="module" src="../js/utils.js"></script>
 </body>
 <footer>
     <div>&copy; GamesHub</div>

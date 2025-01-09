@@ -1,3 +1,10 @@
+localStorage.setItem('currentUser', JSON.stringify({
+    'userName': 'mosheS',
+    'password': '12345',
+    'highScore': 2
+}));
+
+import { updateLeaderboard } from '../js/utils.js';
 
 /**
  * Class representing the Snake Game.
@@ -269,6 +276,7 @@ class SnakeGame {
             ...this.user,
             'highScore': this.highScore
         }));
+        saveScoreToLeaderBoard(this.highScore);
     }
 
     /**
@@ -392,6 +400,39 @@ class SnakeGame {
         this.isGamePaused = false;
     }
 
+    /**
+     * 
+     * @param {Number} score 
+     */
+    saveScoreToLeaderBoard(score) {
+        const currentUser = this.user ? this.user.userName : null;
+
+        if (!currentUser) return;
+     
+        const currentDate = new Date().toISOString();
+    
+        let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+    
+        // Find the existing entry for the current user
+        const existingEntry = leaderboard.find((entry) => entry.name === currentUser);
+    
+        if (existingEntry) {
+            // Update the score if the new score is higher
+            if (score > existingEntry.score) {
+                existingEntry.score = score;
+                existingEntry.date = currentDate;
+            }
+        } else {
+            // Add a new entry for the current user
+            leaderboard.push({ name: currentUser, score, date: currentDate });
+        }
+    
+        leaderboard.sort((a, b) => b.score - a.score);
+    
+        localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+    
+        updateLeaderboard(leaderboard);
+    }
 }
 
 // Create a new instance of the Snake game
