@@ -1,7 +1,7 @@
 localStorage.setItem('currentUser', JSON.stringify({
     'userName': 'mosheS',
     'password': '12345',
-    'highScore': 2
+    'highScore': 1
 }));
 
 import { updateLeaderboard } from '../js/utils.js';
@@ -276,7 +276,7 @@ class SnakeGame {
             ...this.user,
             'highScore': this.highScore
         }));
-        saveScoreToLeaderBoard(this.highScore);
+        this.saveScoreToLeaderBoard(this.highScore);
     }
 
     /**

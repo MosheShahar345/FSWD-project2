@@ -35,14 +35,22 @@
                     <th>User Name</th>
                     <th>Snake High Score</th>
                     <th>Minesweeper High Score</th>
+                    <th>Date</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="user-stats-data">
                 <!-- <td>s are added dynamically here -->
             </tbody>
         </table>
     </main>
-    <script type="module" src="../js/utils.js"></script>
+    <script type="module">
+        import { updateLeaderboard } from '../js/utils.js';
+        document.addEventListener("DOMContentLoaded", () => {
+        const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+        const statsTable = document.getElementById('user-stats-data');
+        updateLeaderboard(leaderboard, statsTable);
+    });
+    </script>
 </body>
 <footer>
     <div>&copy; GamesHub</div>
