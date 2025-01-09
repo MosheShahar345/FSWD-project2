@@ -404,25 +404,25 @@ class SnakeGame {
      
         const currentDate = new Date().toISOString();
     
-        let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+        let leaderboard = JSON.parse(localStorage.getItem('leaderboardSnake')) || [];
     
         // Find the existing entry for the current user
-        const existingEntry = leaderboard.find((entry) => entry.username === currentUser.username);
+        const existingEntry = leaderboard.find((entry) => entry.username === currentUser);
     
         if (existingEntry) {
             // Update the score if the new score is higher
-            if (score > existingEntry.score) {
-                existingEntry.score = score;
+            if (score > existingEntry.snakeHighScore) {
+                existingEntry.snakeHighScore = score;
                 existingEntry.date = currentDate;
             }
         } else {
             // Add a new entry for the current user
-            leaderboard.push({ 'username': currentUser, 'snakeHighScore': score, 'Date': currentDate });
+            leaderboard.push({ ...this.user, 'snakeHighScore': score, 'Date': currentDate });
         }
     
-        leaderboard.sort((a, b) => b.score - a.score);
+        leaderboard.sort((a, b) => b.snakeHighScore - a.snakeHighScore);
     
-        localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+        localStorage.setItem('leaderboardSnake', JSON.stringify(leaderboard));
     }
 }
 

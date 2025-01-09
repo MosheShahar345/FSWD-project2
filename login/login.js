@@ -27,6 +27,7 @@ class Login {
         this.createEventListeners();
 
         let currentUser = localStorage.getItem("currentUser");
+
         if(currentUser) {
             this.goLoggedIn();
         }
@@ -87,11 +88,11 @@ class Login {
         this.submitSigninForm.addEventListener('submit', (e) => {
             e.preventDefault();
             let formData = new FormData(e.target);
-            var object = {};
+            var object = {'snakeHighScore': 0, 'minesweeperScore': 0};
             formData.forEach(function(value, key){
                 object[key] = value;
             });
-            object['snakeHighScore'] = 0;
+          
             this.signinAttempt(object);
             //localStorage.setItem(object["username"], JSON.stringify(object));
 
@@ -103,9 +104,11 @@ class Login {
 
         this.submitLoginForm.addEventListener('submit', (e) => {
             e.preventDefault();
+
             let formData = new FormData(e.target);
-            var object = {};
-            formData.forEach(function(value, key){
+            var object = {'snakeHighScore': 0, 'minesweeperScore': 0};
+
+            formData.forEach((value, key) => {
                 object[key] = value;
             });
 

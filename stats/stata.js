@@ -1,4 +1,7 @@
-import { updateLeaderboard } from '../js/utils.js';
+import { updateLeaderboardSnake, updateLeaderboardMinesweeoer} from '../js/utils.js';
 
-let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-updateLeaderboard(leaderboard);
+let leaderboardSnake = JSON.parse(localStorage.getItem('leaderboardSnake')) || [];
+updateLeaderboardSnake(leaderboardSnake);
+
+let leaderboardMinesweeoer = JSON.parse(localStorage.getItem('leaderboardMinesweeoer')) || [];
+updateLeaderboardMinesweeoer(leaderboardMinesweeoer);
