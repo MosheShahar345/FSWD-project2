@@ -289,7 +289,7 @@ class SnakeGame {
             this.highScore = currentScore;
         }
 
-        this.highScoreText.textContent = this.highScore.toString().padStart(3, '0');
+        this.highScoreText.textContent = this.snakeHighScore?.toString().padStart(3, '0');
 
         if (this.isGameStarted || this.user) {
             this.highScoreText.style.display = 'block';

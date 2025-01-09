@@ -15,7 +15,7 @@ export function updateLeaderboard(leaderboard) {
         row.innerHTML = `
             <td>${entry.username}</td>
             <td>${entry.snakeHighScore ?? '---'}</td>
-            <td>${entry.mainesweeperHighScore ?? '---'}</td>
+            <td>${entry.minesweeperHighScore ?? '---'}</td>
             <td>${new Date(entry.Date).toLocaleString()}</td>
         `;
         statsTable.appendChild(row);
