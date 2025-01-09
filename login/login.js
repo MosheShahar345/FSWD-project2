@@ -5,7 +5,10 @@ class Login {
         this.loggedIn = document.getElementById('logged-in');
         this.loggedInButton = document.getElementById('logged-in-button');
         this.logOutButton = document.getElementById('log-out-button');
+
         this.profileInfo = document.getElementById('profile-info');
+        this.profileMail = document.getElementById('profile-info-mail');
+        this.profileLeaderboardButton = document.getElementById('profile-info-leaderboard');
 
         this.loginBox = document.getElementById('login-box');
         this.overlay = document.getElementById('overlay');
@@ -40,6 +43,12 @@ class Login {
     goLoggedIn() {
         this.loggedIn.style.display = 'block';
         this.loggedOut.style.display = 'none';
+
+        //set email
+        let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        let gmail = currentUser["email"];
+        this.profileMail.textContent = gmail;
+
     }
 
     createEventListeners() {
@@ -133,17 +142,19 @@ class Login {
 
     loginAttempt(username, password) {
         let userData = localStorage.getItem(username);
+        if(!userData) {
+            alert("password incorrect");
+            return;
+        }
         let user = JSON.parse(userData);
         let passwordLS = user["password"];
-        if(passwordLS !== password) {
-            let loginAttempts = parseInt(localStorage.getItem("loginAttempts"));
-            if(loginAttempts > 4) {
-                alert("too many attempts");
-            } else {
-                alert("password incorrect");
-                let newLoginAttempts = loginAttempts + 1;
-                localStorage.setItem("loginAttempts", newLoginAttempts);
-            }
+        let loginAttempts = parseInt(localStorage.getItem("loginAttempts"));
+        if(loginAttempts > 2) {
+            alert("too many attempts");
+        } else if(passwordLS !== password) {
+            alert("password incorrect");
+            let newLoginAttempts = loginAttempts + 1;
+            localStorage.setItem("loginAttempts", newLoginAttempts);
         } else {
             localStorage.setItem("currentUser", userData);
             this.goLoggedIn();

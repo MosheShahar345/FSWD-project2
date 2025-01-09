@@ -121,7 +121,23 @@ form {
 
 .profile-info-section {
     border-bottom: 1px solid #F2F2F2;
-    padding: 18px 5px;
+    padding: 18px 10px;
+}
+
+.profile-info-buttons {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.profile-info-text:hover {
+    color: gray;
+}
+
+.profile-info-text {
+    padding-top: 3px;
+    padding-left: 10px;
+    color: black;
 }
 
 .form-buttons {
@@ -198,4 +214,12 @@ input {
 #close-login:hover, #close-sing-in:hover {
     background-color: #c82333;
     color: white;
+}
+
+#log-out-button {
+    color: red;
+}
+
+#log-out-button:hover {
+    color: #c82333;
 }
