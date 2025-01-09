@@ -398,7 +398,7 @@ class SnakeGame {
      * @param {Number} score - The highest achieved score to save (this.heighScore)
      */
     saveScoreToLeaderBoard(score) {
-        const currentUser = this.user ? this.user.userName : null;
+        const currentUser = this.user ? this.user.username : null;
 
         if (!currentUser) return;
      
@@ -407,7 +407,7 @@ class SnakeGame {
         let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
     
         // Find the existing entry for the current user
-        const existingEntry = leaderboard.find((entry) => entry.userName === currentUser.userName);
+        const existingEntry = leaderboard.find((entry) => entry.username === currentUser.username);
     
         if (existingEntry) {
             // Update the score if the new score is higher
@@ -417,7 +417,7 @@ class SnakeGame {
             }
         } else {
             // Add a new entry for the current user
-            leaderboard.push({ 'userName': currentUser, 'snakeHighScore': score, 'Date': currentDate });
+            leaderboard.push({ 'username': currentUser, 'snakeHighScore': score, 'Date': currentDate });
         }
     
         leaderboard.sort((a, b) => b.score - a.score);
