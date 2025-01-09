@@ -49,7 +49,7 @@ class SnakeGame {
         this.isWallPassable = false; // Indicates if walls are passable (easy mode)
         this.isGamePaused = false; // Indicates if the game is paused
         this.user = JSON.parse(localStorage.getItem('currentUser'));
-        this.highScore = this.user ? this.user.highScore : 0; // Track the highest score
+        this.highScore = this.user ? this.user.snakeHighScore : 0; // Track the highest score
 
         this.updateHighScore();
 
@@ -267,7 +267,7 @@ class SnakeGame {
         this.drawGame();
         this.user && localStorage.setItem('currentUser', JSON.stringify({ 
             ...this.user,
-            'highScore': this.highScore
+            'snakeHighScore': this.highScore
         }));
         this.saveScoreToLeaderBoard(this.highScore);
     }
@@ -407,7 +407,7 @@ class SnakeGame {
         let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
     
         // Find the existing entry for the current user
-        const existingEntry = leaderboard.find((entry) => entry.name === currentUser);
+        const existingEntry = leaderboard.find((entry) => entry.userName === currentUser.userName);
     
         if (existingEntry) {
             // Update the score if the new score is higher
