@@ -1,10 +1,3 @@
-localStorage.setItem('currentUser', JSON.stringify({
-    'userName': 'mosheS',
-    'password': '12345',
-    'highScore': 1
-}));
-
-import { updateLeaderboard } from '../js/utils.js';
 
 /**
  * Class representing the Snake Game.
@@ -401,8 +394,8 @@ class SnakeGame {
     }
 
     /**
-     * 
-     * @param {Number} score 
+     * Saves the score to the leaderboard for the current user.
+     * @param {Number} score - The highest achieved score to save (this.heighScore)
      */
     saveScoreToLeaderBoard(score) {
         const currentUser = this.user ? this.user.userName : null;
@@ -424,14 +417,12 @@ class SnakeGame {
             }
         } else {
             // Add a new entry for the current user
-            leaderboard.push({ name: currentUser, score, date: currentDate });
+            leaderboard.push({ 'userName': currentUser, 'snakeHighScore': score, 'Date': currentDate });
         }
     
         leaderboard.sort((a, b) => b.score - a.score);
     
         localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
-    
-        updateLeaderboard(leaderboard);
     }
 }
 
