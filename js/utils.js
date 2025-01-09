@@ -1,8 +1,8 @@
-export function updateLeaderboard(leaderboard, statsTable) {
-    const statsTable = document.getElementById(statsTable);
+export function updateLeaderboard(leaderboard) {
+    const statsTable = document.getElementById('user-stats-data');
 
     // Clear the table body
-    statsTable.innerHTML = ' ';
+    statsTable.innerHTML = '';
 
     // Populate the table with the updated leaderboard
     leaderboard.forEach((entry, index) => {

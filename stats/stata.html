@@ -43,14 +43,7 @@
             </tbody>
         </table>
     </main>
-    <script type="module">
-        import { updateLeaderboard } from '../js/utils.js';
-        document.addEventListener("DOMContentLoaded", () => {
-        const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-        const statsTable = document.getElementById('user-stats-data');
-        updateLeaderboard(leaderboard, statsTable);
-    });
-    </script>
+    <script type="module" src="../js/utils.js"></script>
 </body>
 <footer>
     <div>&copy; GamesHub</div>
