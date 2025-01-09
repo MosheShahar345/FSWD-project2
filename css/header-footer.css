@@ -72,7 +72,12 @@ footer {
     border: 1px solid #ccc;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
     z-index: 1000;
+}
+
+.sign-in-box {
+    width: 40%;
 }
 
 .overlay {
@@ -85,6 +90,13 @@ footer {
     z-index: 1000;
 }
 
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .profile-info {
     display: none;
     position: fixed;
@@ -93,8 +105,10 @@ footer {
     width: 200px;
     background: white;
     border: 1px solid #ccc;
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1000;
+    padding: 2px;
 
 }
 
@@ -108,4 +122,80 @@ footer {
 .profile-info-section {
     border-bottom: 1px solid #F2F2F2;
     padding: 18px 5px;
+}
+
+.form-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.form-separator {
+    display: flex;
+    flex-direction: column;
+    padding: 3%;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.error {
+    color: red;
+    font-size: 0.875rem;
+}
+.success {
+    color: green;
+    font-size: 0.875rem;
+}
+
+#submit-login-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 45%;
+    font-size: 1rem;
+    font-family: 'Russo One', sans-serif;
+}
+
+#submit-signin-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 45%;
+    font-size: 1rem;
+    opacity: 0.6; /* Initially disabled */
+    pointer-events: none; /* Initially disabled */
+    font-family: 'Russo One', sans-serif;
+}
+#submit-signin-button.enabled {
+    opacity: 1; /* Enabled */
+    pointer-events: auto; /* Enabled */
+}
+#submit-signin-button:hover {
+    background-color: #0056b3;
+}
+
+#close-login, #close-sing-in {
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 45%;
+    font-size: 1rem;
+    font-family: 'Russo One', sans-serif;
+}
+
+#close-login:hover, #close-sing-in:hover {
+    background-color: #c82333;
+    color: white;
 }

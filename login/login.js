@@ -18,6 +18,9 @@ class Login {
         this.SignInBox = document.getElementById('sign-in-box');
         this.closeLogin = document.getElementById('close-login');
         this.closeSignIn = document.getElementById('close-sing-in');
+        this.SignInForm = document.getElementById('submit-signin-form');
+        console.log(this.SignInForm);
+
         this.createEventListeners();
 
         let currentUser = localStorage.getItem("currentUser");
@@ -67,21 +70,11 @@ class Login {
             this.overlay.style.display = 'none';
         });
 
-        /*
-        document.querySelector('form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.formData = new FormData(e.target);
-            var object = {};
-            this.formData.forEach(function(value, key){
-                object[key] = value;
-            });
-            localStorage.setItem("user", JSON.stringify(object));
 
-            this.loginBox.style.display = 'none';
-            this.SignInBox.style.display = 'none';
-            this.overlay.style.display = 'none';
+        this.SignInForm.addEventListener('input', () => {
+            this.validateForm();
+        });
 
-        });*/
         this.submitSigninForm.addEventListener('submit', (e) => {
             e.preventDefault();
             let formData = new FormData(e.target);
@@ -89,7 +82,6 @@ class Login {
             formData.forEach(function(value, key){
                 object[key] = value;
             });
-            console.log(object);
             this.signinAttempt(object);
             //localStorage.setItem(object["username"], JSON.stringify(object));
 
@@ -144,7 +136,7 @@ class Login {
         let user = JSON.parse(userData);
         let passwordLS = user["password"];
         if(passwordLS !== password) {
-            let loginAttempts = localStorage.getItem("loginAttempts");
+            let loginAttempts = parseInt(localStorage.getItem("loginAttempts"));
             if(loginAttempts > 4) {
                 alert("too many attempts");
             } else {
@@ -155,6 +147,39 @@ class Login {
         } else {
             localStorage.setItem("currentUser", userData);
             this.goLoggedIn();
+        }
+    }
+    
+    validateForm() {
+        const username = document.getElementById('sign-in-username').value;
+        const password = document.getElementById('sign-in-password').value;
+        const confirmPassword = document.getElementById('sign-in-confirm-password').value;
+        const submitBtn = document.getElementById('submit-signin-button');
+        const errorElement = document.getElementById('password-error');
+
+        let isValid = true;
+
+        if (!username || !password || !confirmPassword) {
+            isValid = false;
+        }
+
+        if (password !== confirmPassword) {
+            errorElement.textContent = 'Passwords do not match';
+            errorElement.classList.remove('success');
+            errorElement.classList.add('error');
+            isValid = false;
+        } else {
+            errorElement.textContent = 'Passwords match';
+            errorElement.classList.remove('error');
+            errorElement.classList.add('success');
+        }
+
+        if (isValid) {
+            submitBtn.classList.add('enabled');
+            submitBtn.disabled = false;
+        } else {
+            submitBtn.classList.remove('enabled');
+            submitBtn.disabled = true;
         }
     }
 }
