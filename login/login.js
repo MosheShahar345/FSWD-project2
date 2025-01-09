@@ -91,6 +91,7 @@ class Login {
             formData.forEach(function(value, key){
                 object[key] = value;
             });
+            object['snakeHighScore'] = 0;
             this.signinAttempt(object);
             //localStorage.setItem(object["username"], JSON.stringify(object));
 
